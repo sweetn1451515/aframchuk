@@ -1,0 +1,95 @@
+using System;
+
+public interface ILamp
+{
+    string Type { get; set; }
+    string Manufacturer { get; set; }
+    int PowerInLumens { get; set; }
+    string LightType { get; set; }
+    int NumberOfElements { get; set; }
+
+    void PrintDetails();
+    void ChangePower(int newPower);
+}
+
+public interface ICamera
+{
+    string Type { get; set; }
+    string Manufacturer { get; set; }
+    int OpticalSensitivity { get; set; }
+
+    void PrintDetails();
+    void ChangeSensitivity(int newSensitivity);
+}
+
+public class PhotoStudio : ILamp, ICamera
+{
+    public string Type { get; set; }
+    public string Manufacturer { get; set; }
+    public int PowerInLumens { get; set; }
+    public string LightType { get; set; }
+    public int NumberOfElements { get; set; }
+    public int OpticalSensitivity { get; set; }
+
+    public void PrintDetails()
+    {
+        Console.WriteLine($"Lamp Details:");
+        Console.WriteLine($"Type: {Type}");
+        Console.WriteLine($"Manufacturer: {Manufacturer}");
+        Console.WriteLine($"Power in Lumens: {PowerInLumens}");
+        Console.WriteLine($"Light Type: {LightType}");
+        Console.WriteLine($"Number of Elements: {NumberOfElements}");
+    }
+
+    public void ChangePower(int newPower)
+    {
+        PowerInLumens = newPower;
+        Console.WriteLine($"Power changed to {newPower} lumens.");
+    }
+
+    public void ChangeSensitivity(int newSensitivity)
+    {
+        OpticalSensitivity = newSensitivity;
+        Console.WriteLine($"Sensitivity changed to {newSensitivity}.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        PhotoStudio studio1 = new PhotoStudio
+        {
+            Type = "LED",
+            Manufacturer = "XYZ Corp",
+            PowerInLumens = 5000,
+            LightType = "Daylight",
+            NumberOfElements = 4,
+            OpticalSensitivity = 800
+        };
+
+        PhotoStudio studio2 = new PhotoStudio
+        {
+            Type = "Fluorescent",
+            Manufacturer = "ABC Inc",
+            PowerInLumens = 3000,
+            LightType = "Warm White",
+            NumberOfElements = 6,
+            OpticalSensitivity = 1000
+        };
+
+        Console.WriteLine("Studio 1:");
+        studio1.PrintDetails();
+        Console.WriteLine();
+
+        Console.WriteLine("Studio 2:");
+        studio2.PrintDetails();
+        Console.WriteLine();
+
+        studio1.ChangeSensitivity(900);
+        Console.WriteLine();
+
+        Console.WriteLine("Updated Studio 1:");
+        studio1.PrintDetails();
+    }
+}
